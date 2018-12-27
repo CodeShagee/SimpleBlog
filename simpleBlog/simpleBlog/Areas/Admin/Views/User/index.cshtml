@@ -1,0 +1,39 @@
+﻿
+@model simpleBlog.Areas.Admin.ViewModels.UserIndex
+  
+<h1>this is admin user</h1>
+
+<div class="btn-toolbar">
+    <a href="@Url.Action("new")" class="btn btn-primary btn-sm"> Create user </a>
+</div>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Roles</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var user in Model.Users)
+        {
+            <tr>
+                <td>@user.UserID</td>
+                <td>@user.Username</td>
+                <td>@user.Email</td>
+                <td>@string.Join(",", user.Roles.Select(role => role.RoleName))</td>
+                <td>
+                    <div class="btn-group">
+                        <a href="@Url.Action("edit",new { id=user.UserID})" class="btn btn-sm btn-primary">Edit</a>
+                        <a href="@Url.Action("resetpassword",new { id=user.UserID})" class="btn btn-sm btn-light">Reset Password</a>
+                        <a href="@Url.Action("delete",new { id=user.UserID})" class="btn btn-sm btn-danger" data-post="Are you sure you want to delete @user.Username ">Delete</a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

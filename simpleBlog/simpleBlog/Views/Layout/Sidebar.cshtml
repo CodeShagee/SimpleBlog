@@ -1,0 +1,56 @@
+﻿@model simpleBlog.ViewModels.LayoutSidebar
+
+@{
+    Layout = null;
+}
+
+<div class="card border-success mb-4">
+    <div class="card-header">About Me</div>
+    <div class="card-body">
+        Some stuff gose here
+    </div>
+</div>
+
+@if (Model.Tags.Any())
+{
+    var maxPostInTags = Model.Tags.Max(t => t.PostCount);
+
+    <div class="card tags">
+        <div class="card-header">Tags</div>
+        <div class="card-body">
+            <div class="list-group">
+                @foreach (var tag in Model.Tags)
+                {
+                    var percent = Math.Ceiling((float)tag.PostCount / maxPostInTags * 100);
+                    <a href="@Url.RouteUrl("Tag",new { id =tag.Id, slug= tag.Slug})" class="list-group-item">
+                        <span class="name">@tag.Name</span>
+                        <span class="badge badge-secondary float-right">@tag.PostCount</span>
+                        <span class="progress">
+                            <span class="progress-bar bg-secondary" style="width: @percent%"></span>
+                        </span>
+                    </a>
+                }
+            </div>
+        </div>
+    </div>
+}
+@if (Model.IsLoggedIn && Model.isAdmin)
+{
+    <div class="card ">
+        <div class="card-header">Welcome  @Model.username</div>
+        <div class="card-body">
+            <div class="btn-group btn-group-sm">
+                <a href="@Url.Action("index","post",new {area="admin"})" class="btn btn-secondary">Posts</a>
+                <button class="btn btn-secondary dropdown-toggle" data-toggle="dropdown">
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="@Url.Action("new","post",new { area ="admin"})">Create Post</a>
+                    </li>
+                </ul>
+            </div>
+            </div>
+        </div>
+
+            }

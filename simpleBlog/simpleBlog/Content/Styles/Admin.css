@@ -1,0 +1,47 @@
+﻿
+.field-validation-error{
+    color:#f13939;
+}
+.field-validation-valid{
+    display:none;
+}
+.input-validation-error{
+    border:1px solid #f13939;
+    background-color:#ffeeee;
+}
+.validation-summary-errors {
+    border:1px solid red;
+    color:#f13939;
+    background-color:#ffeeee;
+    padding:10px;
+}
+.post-tag-editor .tag-select{
+    list-style:none;
+    padding:0;
+    margin: 10px 0;
+
+}
+.post-tag-editor .tag-select li{
+    margin:0;
+    padding:0;
+    border-bottom: 1px dashed #eee;
+}
+.post-tag-editor .tag-select li.template {
+    display:none;
+}
+.post-tag-editor .tag-select li a{
+    display:block;
+    padding: 2px 5px;
+    border-left:20px solid #eef;
+
+}
+.post-tag-editor .tag-select li a:hover{
+    text-decoration:none;
+    background:#eee;
+}
+.post-tag-editor .tag-select li.selected a {
+     background:#c5e7f7;
+     border-left-color:#3183ac;
+}
+
+

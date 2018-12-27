@@ -1,0 +1,21 @@
+﻿@model simpleBlog.Infrastructure.PageData<simpleBlog.Models.Post>
+
+@foreach (var post in Model)
+{
+    @Html.Partial("_Post",post)
+}
+<ul class="list-unstyled">
+    @if (Model.HasPreviousPage)
+    {
+        <li class="float-left">
+            <a href="@Url.Action(null,new { page = Model.PreviousPage })" class="btn btn-primary">Newer Posts</a>
+        </li>
+    }
+    @if (Model.HasNextPage)
+    {
+        <li class="float-right">
+            <a href="@Url.Action(null,new { page = Model.NextPage })" class="btn btn-primary">Older Posts</a>
+        </li>
+    }
+
+</ul>

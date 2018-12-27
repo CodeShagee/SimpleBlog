@@ -1,0 +1,14 @@
+﻿@model simpleBlog.ViewModels.PostsTag
+
+@{ 
+    ViewBag.Title = Model.Tag.Name;
+}
+
+<div class="card bg-dark">
+    <div class="card-header text-light">
+        Posts Tagged With <strong>@Model.Tag.Name</strong>.
+        <a href="@Url.RouteUrl("Home")" class="float-right text-light">Show all</a>
+    </div>
+         </div>
+
+@Html.Partial("_Posts",Model.Posts)

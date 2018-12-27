@@ -1,0 +1,78 @@
+﻿@model simpleBlog.Areas.Admin.ViewModels.PostsIndex
+
+
+<h1>Post</h1>
+
+<div class="btn-toolbar">
+    <div class="btn-group">
+        <a href="@Url.Action("new")" class="btn btn-primary btn-sm">Create Post</a>
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Author </th>
+                <th>Tags</th>
+                <th>Date</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var post in Model.Posts)
+            {
+                var cls = "";
+                if (post.IsDeleted)
+                {
+                    cls = "danger";
+                }
+                <tr class="@cls">
+                    <td>@post.Title</td>
+                    <td>@post.User.Username</td>
+                    <td>@string.Join(",",post.Tags.Select(t => t.Name))</td>
+                    <td>@post.CreatedAt</td>
+                    <td>
+                       
+
+                        @if (!post.IsDeleted)
+                        {
+                            <a href="@Url.Action("edit", new { Id = post.PostId})" class="btn btn-primary btn-sm">Edit</a>
+                            <div class="btn-group btn-group-sm">
+                                <a href="@Url.Action("trash",new { id = post.PostId })" class="btn btn-danger" data-post="Are you sure you want to trash this post?">Trash</a>
+                                <a href="#" class="btn btn-danger dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"><span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="@Url.Action("delete",new { id = post.PostId })" data-post="Are you sure you want to delete this permanetly?">Delete</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        }
+                        else
+                        {
+                            <a href="@Url.Action("restore",new { id = post.PostId })" class="btn btn-sm btn-success" data-post="">Restore</a>
+                                }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table> 
+    <div class="btn-group float-right">
+        @if (Model.Posts.HasPreviousPage)
+        {
+            <a href="@Url.Action("Index",new { page = Model.Posts.PreviousPage })" class="btn btn-primary btn-sm">Previous Page</a>
+
+        }
+        else
+        {
+            <a href="#" class="btn btn-default btn-disabled btn-sm">Previous Page</a>
+        }
+        @if (Model.Posts.HasNextPage)
+        {
+            <a href="@Url.Action("Index", new { page = Model.Posts.NextPage})" class="btn btn-primary btn-sm">Next page</a>
+        }
+        else
+        {
+            <a href="#" class="btn btn-default btn-disabled btn-sm">Next Page</a>
+        }
+    </div>
+</div>
